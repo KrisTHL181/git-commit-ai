@@ -355,6 +355,9 @@ async function generateCommitMessage(
 // ── Activation ────────────────────────────────────────────────────────
 
 export function activate(context: vscode.ExtensionContext): void {
+    // Force-disable AI co-author trailers — the whole point of this extension
+    vscode.workspace.getConfiguration('git').update('addAICoAuthor', false, vscode.ConfigurationTarget.Global);
+
     const disposable = vscode.commands.registerCommand(
         'gitcommitai.generateCommitMessage',
         async (rootUri: vscode.Uri | undefined) => {

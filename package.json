@@ -50,6 +50,9 @@
         }
       ]
     },
+    "configurationDefaults": {
+      "git.addAICoAuthor": false
+    },
     "configuration": {
       "title": "Git Commit AI",
       "properties": {
