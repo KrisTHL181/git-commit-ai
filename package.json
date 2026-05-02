@@ -1,0 +1,111 @@
+{
+  "name": "git-commit-ai",
+  "displayName": "Git Commit AI",
+  "description": "Generate git commit messages using any OpenAI-compatible AI model",
+  "version": "1.0.0",
+  "publisher": "git-commit-ai",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "enabledApiProposals": [
+    "contribSourceControlInputBoxMenu"
+  ],
+  "categories": [
+    "SCM Providers",
+    "AI"
+  ],
+  "keywords": [
+    "git",
+    "commit",
+    "ai",
+    "openai",
+    "gpt",
+    "ollama"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitcommitai.generateCommitMessage",
+        "title": "Generate Commit Message (AI)",
+        "icon": "$(sparkle)",
+        "category": "Git Commit AI"
+      }
+    ],
+    "menus": {
+      "scm/inputBox": [
+        {
+          "command": "gitcommitai.generateCommitMessage",
+          "when": "scmProvider == git",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "gitcommitai.generateCommitMessage",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Git Commit AI",
+      "properties": {
+        "gitcommitai.apiEndpoint": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "OpenAI-compatible API endpoint URL (e.g., https://api.openai.com/v1, http://localhost:11434/v1 for Ollama)"
+        },
+        "gitcommitai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the OpenAI-compatible service. Leave empty for local services like Ollama."
+        },
+        "gitcommitai.model": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "Model name to use for commit message generation (e.g., gpt-4o, gpt-4o-mini, llama3, deepseek-chat)"
+        },
+        "gitcommitai.temperature": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Temperature for generation. Lower values produce more predictable output."
+        },
+        "gitcommitai.maxTokens": {
+          "type": "number",
+          "default": 1024,
+          "minimum": 64,
+          "maximum": 4096,
+          "description": "Maximum tokens in the generated commit message."
+        },
+        "gitcommitai.customInstructions": {
+          "type": "string",
+          "default": "",
+          "description": "Custom instructions appended to the system prompt for commit message generation (e.g., 'Use conventional commits format', 'Write in Chinese')"
+        },
+        "gitcommitai.systemPrompt": {
+          "type": "string",
+          "default": "",
+          "description": "Override the default system prompt entirely. Leave empty to use the built-in prompt."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/vscode": "^1.82.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "openai": "^6.35.0"
+  }
+}
