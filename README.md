@@ -2,6 +2,10 @@
 
 AI-powered git commit message generator for VS Code. Works with any OpenAI-compatible API.
 
+## Why
+
+The official GitHub Copilot Chat extension automatically appends `Co-Authored-By: Copilot` to commit messages it generates. This extension exists because I don't want AI signatures in my commit history — the commit message should reflect my intent, not an advertisement for the tool that helped draft it.
+
 ## Features
 
 - Sparkle button in the SCM commit input box — one click to generate a commit message
