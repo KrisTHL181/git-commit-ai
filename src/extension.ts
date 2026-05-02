@@ -139,7 +139,7 @@ async function getUntrackedPatch(repo: GitRepository, resource: vscode.Uri): Pro
                 lines.pop();
             }
             patch.push(`@@ -0,0 +1,${lines.length} @@`);
-            patch.push(...lines.map(line => `+${line}`));
+            patch.push(...lines.map((line: string) => `+${line}`));
             if (!content.endsWith('\n')) {
                 patch.push('\\ No newline at end of file');
             }
